@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMCache", "BMCache.csproj", "{1F6941B2-2193-4C3A-8B84-882ABFEA2F95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F6941B2-2193-4C3A-8B84-882ABFEA2F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6941B2-2193-4C3A-8B84-882ABFEA2F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6941B2-2193-4C3A-8B84-882ABFEA2F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6941B2-2193-4C3A-8B84-882ABFEA2F95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F5A352A-76A0-48BA-858A-6B9A95F5EAF9}
+	EndGlobalSection
+EndGlobal

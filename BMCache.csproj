@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Anemon</Authors>
+    <Description>A simple C# cacher. Caching in file.</Description>
+    <Copyright>Copyright © Anemon 2022</Copyright>
+    <RepositoryUrl>https://github.com/AnemonOFF/BMCache</RepositoryUrl>
+    <PackageTags>cache caching cacher filecache bmcache anemonoff anemon</PackageTags>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+	<None Include="LICENSE" Pack="true" PackagePath=""></None>
+  </ItemGroup>
+
+</Project>

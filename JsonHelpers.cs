@@ -9,4 +9,5 @@ public class CachedFileInfo
 {
     public DateTime Expired { get; set; }
     public string Identifier { get; set; }
+    public Guid GUID { get; set; }
 }

@@ -111,12 +111,13 @@ public class BMCacher
     public void Cache<T>(string identifier, T cacheableObject, TimeSpan? expirationTime = null)
     {
         var content = JsonConvert.SerializeObject(cacheableObject);
-        var path = Path.Combine(_dir, _name, identifier + ".bm");
+        var guid = Guid.NewGuid();
+        var path = Path.Combine(_dir, _name, guid + ".bm");
         using var writer = new StreamWriter(path, false);
         writer.Write(content);
         writer.Flush();
         writer.Close();
-        AddCachedFileInfo(identifier, expirationTime);
+        AddCachedFileInfo(identifier, guid, expirationTime);
     }
 
     /// <summary>
@@ -143,10 +144,10 @@ public class BMCacher
             return default;
         if(info.Expired < DateTime.UtcNow)
         {
-            DeleteCachedFile(identifier);
+            DeleteCachedFile(identifier, info.GUID);
             return default;
         }
-        var path = Path.Combine(_dir, _name, identifier + ".bm");
+        var path = Path.Combine(_dir, _name, info.GUID + ".bm");
         var fileInfo = new FileInfo(path);
         if(!fileInfo.Exists)
             return default;
@@ -168,34 +169,35 @@ public class BMCacher
     {
         foreach (var info in new List<CachedFileInfo>(mainFile.Files))
         {
-            var fileInfo = new FileInfo(Path.Combine(dir, name, info.Identifier + ".bm"));
+            var fileInfo = new FileInfo(Path.Combine(dir, name, info.GUID + ".bm"));
             if (info.Expired < DateTime.UtcNow || !fileInfo.Exists)
             {
-                DeleteCachedFile(info.Identifier);
+                DeleteCachedFile(info.Identifier, info.GUID);
                 if (fileInfo.Exists)
                     fileInfo.Delete();
             }
         }
     }
 
-    private void DeleteCachedFile(string identifier)
+    private void DeleteCachedFile(string identifier, Guid guid)
     {
-        var info = _mainFile.Files.Find(x => x.Identifier == identifier);
+        var info = _mainFile.Files.Find(x => x.GUID == guid);
         if (info == null)
             throw new Exception($"{identifier} not exist.");
         _mainFile.Files.Remove(info);
         Save();
-        var fileInfo = new FileInfo(Path.Combine(_dir, _name, identifier + ".bm"));
+        var fileInfo = new FileInfo(Path.Combine(_dir, _name, guid + ".bm"));
         if (fileInfo.Exists)
             fileInfo.Delete();
     }
 
-    private void AddCachedFileInfo(string identifier, TimeSpan? expirationTime = null)
+    private void AddCachedFileInfo(string identifier, Guid guid, TimeSpan? expirationTime = null)
     {
         var info = new CachedFileInfo
         {
             Expired = DateTime.UtcNow.AddTicks(expirationTime?.Ticks ?? _expirationTime.Ticks),
-            Identifier = identifier
+            Identifier = identifier,
+            GUID = guid,
         };
         _mainFile.Files.Add(info);
         Save();
